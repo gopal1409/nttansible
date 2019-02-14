@@ -1,0 +1,64 @@
+    1  yum  update -y
+    2  init 6
+    3  yum update -y
+    4  init 0
+    5  vi /etc/hosts
+    6  clear
+    7  ssh-keygen 
+    8  ssh-copy-id -i ~/.ssh/id_rsa.pub centos02
+    9  ssh root@centos02
+   10  ssh-copy-id -i ~/.ssh/id_rsa.pub centos3
+   11  ssh-copy-id -i ~/.ssh/id_rsa.pub centos03
+   12  ssh root@centos03
+   13  ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu01
+   14  ssh-copy-id ubuntu01@ubuntu01
+   15  ssh-copy-id ubuntu02@ubuntu02
+   16  ssh-copy-id ubuntu03@ubuntu03
+   17  vi /etc/ansible/
+   18  vi /etc/ansible/hosts 
+   19  ansible all -m ping
+   20  vi /etc/ansible/hosts 
+   21  ansible all -m ping
+   22  ssh root@centos03
+   23  vi /etc/ansible/hosts 
+   24  ansible all -m ping
+   25  ssh root@ubuntu01
+   26  ssh ubuntu01@ubuntu01
+   27  vi /etc/ansible/hosts 
+   28  ansible all -m ping
+   29  vi /etc/ansible/hosts 
+   30  ansible all -m ping
+   31  ansible dev -m ping
+   32  ansible test -m ping
+   33  ansible centos02 -m ping
+   34  ansible ubuntu01 -m ping
+   35  ansible ubuntu01 -m setup
+   36  ansible ubuntu01 -m setup | more
+   37  ansible all -m file -a 'path=/tmp/test state=touch'
+   38  ssh root@centos02
+   39  ansible all -m file -a 'path=/tmp/test state=file mode=600'
+   40  touch /tmp/x
+   41  ansible centos02 -m copy -a 'src=/tmp/x dest=/tmp/x'
+   42  ssh root@centos02
+   43  ansible centos02 -m copy -a 'src=/tmp/x dest=/tmp/y'
+   44  ssh root@centos02
+   45  ansible centos02 -m copy -a 'remote_src=yes src=/tmp/y dest=/tmp/y'
+   46  ansible centos02 -m copy -a 'remote_src=yes src=/tmp/y dest=/tmp/z'
+   47  cd /tmp/
+   48  ls
+   49  ansible all -m command -a 'hostname'
+   50  ansible all -m command -a 'hostname' -o
+   51  ansible all -m command -a 'id' -o
+   52  ansible dev -m command -a 'id' -o
+   53  cd /etc/ansible/hosts 
+   54  vi /etc/ansible/hosts 
+   55  ansible dev -m command -a 'id' -o
+   56  ansible test -m command -a 'id' -o
+   57  ansible test -m command -a 'uname -a' -o
+   58  ansible all -m command -a 'uname -a' -o
+   59  history
+   60  ansible-doc command
+   61  !
+   62  ansible-doc file
+   63  history
+   64  history > ansibleCommands.txt
